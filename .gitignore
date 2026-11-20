@@ -1,0 +1,7 @@
+.venv/
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+edited_chapters/.editing.lock
