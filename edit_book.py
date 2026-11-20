@@ -151,4 +151,8 @@ if __name__ == "__main__":
     try:
         main()
     except errors.APIError as error:
-        raise SystemExit(f"Gemini API request failed (HTTP {error.code}). Check the API key, model access, quota and billing.")
+        key = os.environ.get("GEMINI_API_KEY", "")
+        detail = str(error.message or "Check model access, quota and billing.")
+        if key:
+            detail = detail.replace(key, "[REDACTED]")
+        raise SystemExit(f"Gemini API request failed (HTTP {error.code}): {detail}")
